@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -6,7 +5,8 @@ import IngredientManager from '@/components/IngredientManager';
 import PortionCalculator from '@/components/PortionCalculator';
 import Analytics from '@/components/Analytics';
 import UsageHistory from '@/components/UsageHistory';
-import { ChefHat, Calculator, TrendingUp, History } from 'lucide-react';
+import AprioriAnalysis from '@/components/AprioriAnalysis';
+import { ChefHat, Calculator, TrendingUp, History, Zap } from 'lucide-react';
 
 export interface Ingredient {
   id: string;
@@ -66,7 +66,7 @@ const Index = () => {
         </div>
 
         <Tabs defaultValue="ingredients" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-8">
+          <TabsList className="grid w-full grid-cols-5 mb-8">
             <TabsTrigger value="ingredients" className="flex items-center gap-2">
               <ChefHat className="h-4 w-4" />
               Bahan Baku
@@ -82,6 +82,10 @@ const Index = () => {
             <TabsTrigger value="history" className="flex items-center gap-2">
               <History className="h-4 w-4" />
               Riwayat
+            </TabsTrigger>
+            <TabsTrigger value="apriori" className="flex items-center gap-2">
+              <Zap className="h-4 w-4" />
+              Apriori
             </TabsTrigger>
           </TabsList>
 
@@ -130,6 +134,13 @@ const Index = () => {
 
           <TabsContent value="history">
             <UsageHistory usageHistory={usageHistory} ingredients={ingredients} />
+          </TabsContent>
+
+          <TabsContent value="apriori">
+            <AprioriAnalysis 
+              ingredients={ingredients}
+              usageHistory={usageHistory}
+            />
           </TabsContent>
         </Tabs>
       </div>
