@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -35,7 +34,7 @@ const AprioriAnalysis: React.FC<AprioriAnalysisProps> = ({ ingredients, usageHis
 
   const getIngredientName = (id: string) => {
     const ingredient = ingredients.find(ing => ing.id === id);
-    return ingredient ? ingredient.name : 'Unknown';
+    return ingredient ? ingredient.name : 'Tidak Diketahui';
   };
 
   // Convert usage records to transactions (binary matrix)
@@ -180,13 +179,13 @@ const AprioriAnalysis: React.FC<AprioriAnalysisProps> = ({ ingredients, usageHis
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Zap className="h-5 w-5" />
-            Analisis Apriori - Pola Penggunaan Bahan
+            Analisis Apriori - Pola Penggunaan Bahan Bakso
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <div className="space-y-2">
-              <Label htmlFor="minSupport">Minimum Support</Label>
+              <Label htmlFor="minSupport">Dukungan Minimum (Support)</Label>
               <Input
                 id="minSupport"
                 type="number"
@@ -198,7 +197,7 @@ const AprioriAnalysis: React.FC<AprioriAnalysisProps> = ({ ingredients, usageHis
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="minConfidence">Minimum Confidence</Label>
+              <Label htmlFor="minConfidence">Kepercayaan Minimum (Confidence)</Label>
               <Input
                 id="minConfidence"
                 type="number"
@@ -212,14 +211,14 @@ const AprioriAnalysis: React.FC<AprioriAnalysisProps> = ({ ingredients, usageHis
             <div className="flex items-end">
               <Button onClick={() => setShowRules(!showRules)} className="w-full">
                 <Search className="h-4 w-4 mr-2" />
-                {showRules ? 'Lihat Itemsets' : 'Lihat Rules'}
+                {showRules ? 'Lihat Itemset Sering' : 'Lihat Aturan Asosiasi'}
               </Button>
             </div>
           </div>
 
           {transactions.length === 0 ? (
             <div className="text-center py-8 text-gray-500">
-              Belum ada data transaksi untuk dianalisis
+              Belum ada data transaksi untuk dianalisis. Silakan gunakan Kalkulator Porsi dan simpan beberapa data terlebih dahulu.
             </div>
           ) : (
             <>
@@ -237,7 +236,7 @@ const AprioriAnalysis: React.FC<AprioriAnalysisProps> = ({ ingredients, usageHis
                     <Card>
                       <CardContent className="p-4">
                         <div className="text-center">
-                          <p className="text-sm text-gray-600">Frequent Itemsets</p>
+                          <p className="text-sm text-gray-600">Itemset Sering</p>
                           <p className="text-2xl font-bold text-green-600">{allFrequentItemsets.length}</p>
                         </div>
                       </CardContent>
@@ -245,7 +244,7 @@ const AprioriAnalysis: React.FC<AprioriAnalysisProps> = ({ ingredients, usageHis
                     <Card>
                       <CardContent className="p-4">
                         <div className="text-center">
-                          <p className="text-sm text-gray-600">Association Rules</p>
+                          <p className="text-sm text-gray-600">Aturan Asosiasi</p>
                           <p className="text-2xl font-bold text-orange-600">{associationRules.length}</p>
                         </div>
                       </CardContent>
@@ -254,15 +253,15 @@ const AprioriAnalysis: React.FC<AprioriAnalysisProps> = ({ ingredients, usageHis
 
                   <Card>
                     <CardHeader>
-                      <CardTitle>Frequent Itemsets</CardTitle>
+                      <CardTitle>Itemset Sering (Bahan yang Sering Digunakan Bersamaan)</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <Table>
                         <TableHeader>
                           <TableRow>
-                            <TableHead>Itemset</TableHead>
-                            <TableHead>Support</TableHead>
-                            <TableHead>Ukuran</TableHead>
+                            <TableHead>Kombinasi Bahan</TableHead>
+                            <TableHead>Tingkat Dukungan</TableHead>
+                            <TableHead>Jumlah Bahan</TableHead>
                           </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -293,16 +292,16 @@ const AprioriAnalysis: React.FC<AprioriAnalysisProps> = ({ ingredients, usageHis
               ) : (
                 <Card>
                   <CardHeader>
-                    <CardTitle>Association Rules</CardTitle>
+                    <CardTitle>Aturan Asosiasi (Rekomendasi Penggunaan Bahan)</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead>Antecedent</TableHead>
-                          <TableHead>Consequent</TableHead>
-                          <TableHead>Support</TableHead>
-                          <TableHead>Confidence</TableHead>
+                          <TableHead>Jika Menggunakan</TableHead>
+                          <TableHead>Maka Gunakan Juga</TableHead>
+                          <TableHead>Dukungan</TableHead>
+                          <TableHead>Kepercayaan</TableHead>
                           <TableHead>Lift</TableHead>
                         </TableRow>
                       </TableHeader>

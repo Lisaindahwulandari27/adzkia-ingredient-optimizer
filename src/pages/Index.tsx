@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -60,9 +61,9 @@ const Index = () => {
         <div className="mb-8 text-center">
           <div className="flex items-center justify-center mb-4">
             <ChefHat className="h-12 w-12 text-orange-600 mr-3" />
-            <h1 className="text-4xl font-bold text-gray-800">Bakso Adzkia</h1>
+            <h1 className="text-4xl font-bold text-gray-800">Warung Bakso Adzkia</h1>
           </div>
-          <p className="text-xl text-gray-600">Sistem Analisis Porsi & Optimasi Bahan</p>
+          <p className="text-xl text-gray-600">Sistem Analisis Porsi & Optimasi Bahan Baku</p>
         </div>
 
         <Tabs defaultValue="ingredients" className="w-full">
@@ -85,7 +86,7 @@ const Index = () => {
             </TabsTrigger>
             <TabsTrigger value="apriori" className="flex items-center gap-2">
               <Zap className="h-4 w-4" />
-              Apriori
+              Analisis Apriori
             </TabsTrigger>
           </TabsList>
 
@@ -94,7 +95,7 @@ const Index = () => {
               <CardHeader>
                 <CardTitle>Manajemen Bahan Baku</CardTitle>
                 <CardDescription>
-                  Kelola daftar bahan baku, satuan, dan biaya per unit
+                  Kelola daftar bahan baku, satuan, dan harga per unit untuk warung bakso
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -111,9 +112,9 @@ const Index = () => {
           <TabsContent value="calculator">
             <Card>
               <CardHeader>
-                <CardTitle>Kalkulator Porsi</CardTitle>
+                <CardTitle>Kalkulator Porsi Bakso</CardTitle>
                 <CardDescription>
-                  Hitung kebutuhan bahan berdasarkan jumlah porsi yang akan dibuat
+                  Hitung kebutuhan bahan baku berdasarkan jumlah porsi bakso yang akan dibuat
                 </CardDescription>
               </CardHeader>
               <CardContent>

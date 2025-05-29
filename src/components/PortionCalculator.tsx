@@ -26,7 +26,7 @@ const PortionCalculator: React.FC<PortionCalculatorProps> = ({
   const calculateIngredients = () => {
     if (portions <= 0) {
       toast({
-        title: "Error",
+        title: "Kesalahan",
         description: "Jumlah porsi harus lebih dari 0",
         variant: "destructive"
       });
@@ -44,14 +44,14 @@ const PortionCalculator: React.FC<PortionCalculatorProps> = ({
     setCalculatedIngredients(calculated);
     toast({
       title: "Berhasil",
-      description: `Perhitungan untuk ${portions} porsi berhasil`
+      description: `Perhitungan untuk ${portions} porsi bakso berhasil`
     });
   };
 
   const saveUsageRecord = () => {
     if (Object.keys(calculatedIngredients).length === 0) {
       toast({
-        title: "Error",
+        title: "Kesalahan",
         description: "Lakukan perhitungan terlebih dahulu",
         variant: "destructive"
       });
@@ -75,7 +75,7 @@ const PortionCalculator: React.FC<PortionCalculatorProps> = ({
     onAddUsageRecord(record);
     toast({
       title: "Berhasil",
-      description: "Data penggunaan berhasil disimpan"
+      description: "Data penggunaan bahan berhasil disimpan"
     });
   };
 
@@ -94,24 +94,24 @@ const PortionCalculator: React.FC<PortionCalculatorProps> = ({
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Calculator className="h-5 w-5" />
-            Hitung Kebutuhan Bahan
+            Hitung Kebutuhan Bahan Baku
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex gap-4 items-end">
             <div className="space-y-2 flex-1">
-              <Label htmlFor="portions">Jumlah Porsi</Label>
+              <Label htmlFor="portions">Jumlah Porsi Bakso</Label>
               <Input
                 id="portions"
                 type="number"
-                placeholder="Masukkan jumlah porsi"
+                placeholder="Masukkan jumlah porsi bakso yang akan dibuat"
                 value={portions || ''}
                 onChange={(e) => setPortions(Number(e.target.value))}
               />
             </div>
             <Button onClick={calculateIngredients} disabled={ingredients.length === 0}>
               <Calculator className="h-4 w-4 mr-2" />
-              Hitung
+              Hitung Bahan
             </Button>
           </div>
         </CardContent>
@@ -120,7 +120,7 @@ const PortionCalculator: React.FC<PortionCalculatorProps> = ({
       {Object.keys(calculatedIngredients).length > 0 && (
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>Hasil Perhitungan - {portions} Porsi</CardTitle>
+            <CardTitle>Hasil Perhitungan - {portions} Porsi Bakso</CardTitle>
             <Button onClick={saveUsageRecord}>
               <Save className="h-4 w-4 mr-2" />
               Simpan Data
@@ -130,10 +130,10 @@ const PortionCalculator: React.FC<PortionCalculatorProps> = ({
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Bahan</TableHead>
+                  <TableHead>Nama Bahan</TableHead>
                   <TableHead>Jumlah Diperlukan</TableHead>
                   <TableHead>Satuan</TableHead>
-                  <TableHead>Biaya</TableHead>
+                  <TableHead>Total Biaya</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -142,7 +142,7 @@ const PortionCalculator: React.FC<PortionCalculatorProps> = ({
                     <TableCell className="font-medium">{ingredient.name}</TableCell>
                     <TableCell>{calculatedIngredients[ingredient.id]?.amount?.toFixed(2) || 0}</TableCell>
                     <TableCell>{ingredient.unit}</TableCell>
-                    <TableCell>Rp {(calculatedIngredients[ingredient.id]?.cost || 0).toLocaleString()}</TableCell>
+                    <TableCell>Rp {(calculatedIngredients[ingredient.id]?.cost || 0).toLocaleString('id-ID')}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -151,12 +151,12 @@ const PortionCalculator: React.FC<PortionCalculatorProps> = ({
             <div className="mt-6 p-4 bg-orange-50 rounded-lg">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                 <div>
-                  <p className="text-sm text-gray-600">Total Biaya</p>
-                  <p className="text-2xl font-bold text-orange-600">Rp {getTotalCost().toLocaleString()}</p>
+                  <p className="text-sm text-gray-600">Total Biaya Bahan</p>
+                  <p className="text-2xl font-bold text-orange-600">Rp {getTotalCost().toLocaleString('id-ID')}</p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-600">Biaya per Porsi</p>
-                  <p className="text-2xl font-bold text-green-600">Rp {getCostPerPortion().toLocaleString()}</p>
+                  <p className="text-2xl font-bold text-green-600">Rp {getCostPerPortion().toLocaleString('id-ID')}</p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-600">Jumlah Porsi</p>
@@ -171,7 +171,7 @@ const PortionCalculator: React.FC<PortionCalculatorProps> = ({
       {ingredients.length === 0 && (
         <Card>
           <CardContent className="text-center py-8">
-            <p className="text-gray-500">Tambahkan bahan baku terlebih dahulu untuk melakukan perhitungan</p>
+            <p className="text-gray-500">Tambahkan bahan baku terlebih dahulu di tab "Bahan Baku" untuk melakukan perhitungan</p>
           </CardContent>
         </Card>
       )}
