@@ -60,8 +60,11 @@ const Index = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8 text-center">
           <div className="flex items-center justify-center mb-4">
-            <ChefHat className="h-12 w-12 text-orange-600 mr-3" />
-            <h1 className="text-4xl font-bold text-gray-800">Warung Bakso Adzkia</h1>
+            <img 
+              src="/lovable-uploads/f847a783-3e72-4fdb-925e-696d4c312cde.png" 
+              alt="Warung Bakso Adzkia Logo" 
+              className="h-16 w-auto mr-3"
+            />
           </div>
           <p className="text-xl text-gray-600">Sistem Analisis Porsi & Optimasi Bahan Baku</p>
         </div>
